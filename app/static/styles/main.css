@@ -96,17 +96,17 @@ body {
     font-weight: 700;
 }
 
-/* Base styling for all content sections */
+
 .section {
-    max-width: 800px; /* Sets a max width for content */
-    margin: 40px auto; /* Centers the section on the page */
-    padding: 30px; /* Adds space so text isn't on the border */
-    background-color: #ffffff; /* White background for the card */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* The subtle shadow */
+    max-width: 800px; 
+    margin: 40px auto; 
+    padding: 30px; 
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
 }
 
-/* Styling for the main headings within sections */
+
 .section h2 {
     text-align: center;
     color: #1C539F;
@@ -121,7 +121,6 @@ body {
     color: #333;
 }
 
-/* Styling for each item in the Work Experience list */
 .experience-item {
     margin-bottom: 25px;
     padding-bottom: 25px;
@@ -151,4 +150,24 @@ body {
     padding-left: 20px;
     list-style-type: disc;
     margin-top: 10px;
+}
+
+/* Styling for the Hobbies section */
+.hobby-item {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Space between image and text */
+}
+
+.hobby-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Prevents image from stretching */
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.hobby-item .hobby-text h3 {
+    margin-top: 0;
+    color: #333;
 }
