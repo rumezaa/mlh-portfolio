@@ -19,7 +19,13 @@ body {
     font-weight: 700 !important;
     padding-top: 10px;
 }
-
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+}
 .nav-content .logo-touch-target {
     display: inline-flex;
     height: 60%;
@@ -42,11 +48,26 @@ body {
 }
 
 .nav-content nav {
-    display: block;
-    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
     text-align: right;
     padding-top: 0px;
     padding-right: 0px;
+}
+
+.nav-content nav a {
+    color: white;
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1), color 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-content nav a:hover {
+    transform: scale(1.12);
+    color: #FFD700;
 }
 
 .profile {
@@ -152,17 +173,17 @@ body {
     margin-top: 10px;
 }
 
-/* Styling for the Hobbies section */
 .hobby-item {
     display: flex;
     align-items: center;
-    gap: 25px; /* Space between image and text */
+    gap: 25px; 
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hobby-item img {
     width: 150px;
     height: 150px;
-    object-fit: cover; /* Prevents image from stretching */
+    object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0;
 }
