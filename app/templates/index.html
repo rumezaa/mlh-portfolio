@@ -32,16 +32,58 @@
 
     <div class="profile">
         <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/profile.png">
+            <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Ahmad Basyouni's Profile Picture">
         </div>
         <h1>{{ title }}</h1>
     </div>
 
+    <!-- About Me Section -->
     <div class="section">
         <h2>About Me</h2>
         <p>
             Hello! I'm Ahmad Basyouni, a Computer Engineering student at CUNY CSI ('26) with a passion for problem-solving and creating impactful solutions. My journey into tech began at age 10, building and fixing computers, which evolved into creating servers and exploring software. I've had the privilege of being a Software Engineering Intern at Warner Bros. Discovery and a Production Engineering Fellow with Meta x MLH.
         </p>
+    </div>
+
+    <!-- Work Experience Section -->
+    <div class="section">
+        <h2>Work Experience</h2>
+        <div class="experience-item">
+            <h3>Production Engineer</h3>
+            <h4>Meta & Major League Hacking | Jun 2025 - Present</h4>
+            <ul>
+                <li>Developing skills in DevOps, infrastructure, and distributed systems as a Production Engineering Fellow, focusing on the principles of reliability and scalability that power Meta's services.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Software Engineer Intern, HBO Max</h3>
+            <h4>Warner Bros. Discovery | Jun 2025 - Present</h4>
+            <ul>
+                <li>Contributing to the GCX Instrumentation Tooling team for HBO Max, utilizing Kotlin and TypeScript to enhance monitoring and content delivery systems.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Software Engineer Intern</h3>
+            <h4>New England Investment Consulting Group | May 2024 – Aug 2024</h4>
+            <ul>
+                <li>Engineered a full-stack AI-driven school platform for over 1,000 students using React, TypeScript, and Python.</li>
+                <li>Implemented a Go microservice and set up a full CI/CD pipeline with AWS, Jenkins, and Docker, cutting deployment times by 30%.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Education Section -->
+    <div class="section">
+        <h2>Education</h2>
+        <div class="experience-item">
+            <h3>B.S. in Computer Engineering</h3>
+            <h4>CUNY College of Staten Island | Expected May 2026</h4>
+            <ul>
+                <li><strong>Minor:</strong> Computer Science | <strong>GPA:</strong> 3.9 / 4.0</li>
+                <li><strong>Relevant Coursework:</strong> Object Oriented Programming, Operating Systems, Data Structures, System Design.</li>
+                <li><strong>Affiliations:</strong> CodePath TA, CUNY Tech Prep, SEO, CS Club.</li>
+            </ul>
+        </div>
     </div>
 
 </body>
