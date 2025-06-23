@@ -49,7 +49,7 @@ def index():
     ]
     hobbies = [
         {
-            'name': 'Socc',
+            'name': 'Soccer',
             'img': 'img/soccer.jpg',
             'alt': 'Soccer ball on a field',
             'desc': "I'm an avid soccer fan and player, enjoying both watching matches and playing in local leagues. It's a great way to stay active, sharpen my strategic thinking, and work as part of a team."
