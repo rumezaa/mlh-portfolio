@@ -1,79 +1,131 @@
-# Production Engineering - Week 1 - Portfolio Site
+# MLH Portfolio - Dual Profile Portfolio Site
 
-Welcome to the MLH Fellowship! During Week 1, you'll be using Flask to build a portfolio site. This site will be the foundation for activities we do in future weeks so spend time this week making it your own and reflect your personality!
+Welcome to our MLH Fellowship Portfolio! This is a Flask-based portfolio site featuring dual profiles for Ahmad Basyouni and Rumeza Fatima, with dynamic content loading from JSON files and a toggle functionality to switch between profiles.
 
-## Tasks
+## Features
 
-Once you've got your portfolio downloaded and running using the instructions below, you should attempt to complete the following tasks.
+### 🎯 Dual Profile System
+- **Dynamic Profile Switching**: Toggle between Ahmad and Rumeza's profiles using the header button
+- **JSON-Based Content**: All profile data is loaded from `data/ahmad.json` and `data/rumeza.json`
+- **Consistent Navigation**: Maintains profile context across Home and Hobbies pages
+- **URL Query Parameters**: Uses `?profile=ahmad` or `?profile=rumeza` for clean URLs
 
-For each of these tasks, you should create an [Issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues) and work on them in a new [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches). When the task has been completed, you should open a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) and get another fellow in your pod to give you feedback before merging it in.
+### 🎨 Dynamic Theming
+- **Ahmad's Theme**: Blue color scheme (#1C539F) with yellow toggle button
+- **Rumeza's Theme**: Purple color scheme (#8A6AC9) with yellow toggle button and purple text
 
-*Note: Make sure to include a link to the Issue you're progressing on inside of your Pull Request so your reviewer knows what you're progressing on!*
 
-### GitHub Tasks
-- [x] Create Issues for each task below
-- [x] Progress on each task in a new branch
-- [x] Open a Pull Request when a task is finished to get feedback
+### 📱 Portfolio Sections
+- **About Me**: Personal descriptions and background
+- **Work Experience**: Detailed work history with company, dates, and achievements
+- **Education**: Academic background and relevant coursework
+- **Hobbies**: Personal interests with images and descriptions
+- **Interactive Map**: Google Maps integration showing travel locations
 
-### Portfolio Tasks
-- [x] Add a photo of yourself to the website
-- [x] Add an "About youself" section to the website.
-- [x] Add your previous work experiences
-- [x] Add your hobbies (including images)
-- [x] Add your current/previous education
-- [x] Add a map of all the cool locations/countries you visited
+## Technical Implementation
 
-### Flask Tasks
-- [x] Get your Flask app running locally on your machine using the instructions below.
-- [x] Add a template for adding multiple work experiences/education/hobbies using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/api/#basics)
-- [x] Create a new page to display hobbies.
-- [x] Add a menu bar that dynamically displays other pages in the app
+### Flask Backend
+- **Dynamic Routes**: Single routes with query parameter handling
+- **JSON Data Loading**: Modular data loading from JSON files
+- **Template Inheritance**: Consistent layout across pages
+- **Error Handling**: Graceful fallbacks for missing data
 
+### Frontend Features
+- **Conditional Styling**: CSS classes that change based on active profile
+- **Responsive Navigation**: Clean header with profile toggle button
+- **Modern CSS**: Flexbox layouts, smooth transitions, and hover effects
 
 ## Getting Started
 
-You need to do all your progress here.
+### Prerequisites
+- Python 3.x
+- pip package manager
 
-## Installation
+### Installation
 
-Make sure you have python3 and pip installed
-
-Create and activate virtual environment using virtualenv
+1. **Clone the repository**
 ```bash
-$ python -m venv python3-virtualenv
-$ source python3-virtualenv/bin/activate
+git clone <repository-url>
+cd mlh-portfolio
 ```
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dependencies!
+2. **Create and activate virtual environment**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: python3-virtualenv\Scripts\activate
+```
 
+3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
+4. **Set up environment variables**
+```bash
+cp .env
+# Edit .env file with your Google Maps API key and other variables
+# Required: GOOGLE_MAPS_API_KEY - Get from Google Cloud Console
+
+```
+
+5. **Run the application**
+```bash
+export FLASK_ENV=development
+flask run
+```
+
+The application will be available at `http://127.0.0.1:5000/`
+
 ## Usage
 
-Create a .env file using the example.env template (make a copy using the variables inside of the template)
+### Profile Navigation
+- **Default View**: Visit `/` to see Ahmad's profile
+- **Rumeza's Profile**: Visit `/?profile=rumeza` or click the toggle button
+- **Hobbies Page**: Visit `/hobbies` or `/hobbies?profile=rumeza`
+- **Toggle Button**: Click "Switch to [Name]" in the header to change profiles
 
-Start flask development server
-```bash
-$ export FLASK_ENV=development
-$ flask run
+### Data Management
+- **Ahmad's Data**: Edit `data/ahmad.json` to update Ahmad's information
+- **Rumeza's Data**: Edit `data/rumeza.json` to update Rumeza's information
+- **Profile Images**: Place images in `app/static/img/` and reference in JSON files
+
+## Project Structure
+
+```
+mlh-portfolio/
+├── app/
+│   ├── __init__.py          # Flask app configuration and routes
+│   ├── static/
+│   │   ├── styles/
+│   │   │   └── main.css     # Styling with conditional themes
+│   │   └── img/             # Profile images and assets
+│   │       └── hobby/       # Hobby images
+│   └── templates/
+│       ├── index.html       # Main portfolio page
+│       └── hobbies.html     # Hobbies page
+├── data/
+│   ├── ahmad.json          # Ahmad's profile data
+│   └── rumeza.json         # Rumeza's profile data
+├── requirements.txt         # Python dependencies
+└── README.md               # This file
 ```
 
-You should get a response like this in the terminal:
-```
-❯ flask run
- * Environment: development
- * Debug mode: on
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-```
+## Customization
 
-You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
+### Adding New Profiles
+1. Create a new JSON file in `data/` (e.g., `data/newprofile.json`)
+2. Follow the existing JSON structure with name, about, work_experiences, education, hobbies, and img fields
+3. Update the Flask routes to include the new profile option
 
-*Note: The portfolio site will only work on your local machine while you have it running inside of your terminal. We'll go through how to host it in the cloud in the next few weeks!* 
+### Styling Changes
+- **Color Themes**: Modify the CSS variables in `app/static/styles/main.css`
+- **Layout**: Update the HTML templates in `app/templates/`
+- **Images**: Replace images in `app/static/img/` and update JSON references
 
-## Contributing
+## License
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+This project is part of the MLH Fellowship program.
 
-Please make sure to update tests as appropriate.
+---
+
+**Built with 💜 using Flask, HTML, CSS, and JavaScript**
