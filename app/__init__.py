@@ -8,4 +8,51 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"))
+    work_experiences = [
+        {
+            'title': 'Production Engineer',
+            'company': 'Meta & Major League Hacking',
+            'date': 'Jun 2025 - Present',
+            'details': [
+                "Developing skills in DevOps, infrastructure, and distributed systems as a Production Engineering Fellow, focusing on the principles of reliability and scalability that power Meta's services."
+            ]
+        },
+        {
+            'title': 'Software Engineer Intern, HBO Max',
+            'company': 'Warner Bros. Discovery',
+            'date': 'Jun 2025 - Present',
+            'details': [
+                "Contributing to the GCX Instrumentation Tooling team for HBO Max, utilizing Kotlin and TypeScript to enhance monitoring and content delivery systems."
+            ]
+        },
+        {
+            'title': 'Software Engineer Intern',
+            'company': 'New England Investment Consulting Group',
+            'date': 'May 2024 – Aug 2024',
+            'details': [
+                "Engineered a full-stack AI-driven school platform for over 1,000 students using React, TypeScript, and Python.",
+                "Implemented a Go microservice and set up a full CI/CD pipeline with AWS, Jenkins, and Docker, cutting deployment times by 30%."
+            ]
+        }
+    ]
+    education = [
+        {
+            'degree': 'B.S. in Computer Engineering',
+            'school': 'CUNY College of Staten Island',
+            'date': 'Expected May 2026',
+            'details': [
+                '<strong>Minor:</strong> Computer Science | <strong>GPA:</strong> 3.9 / 4.0',
+                '<strong>Relevant Coursework:</strong> Object Oriented Programming, Operating Systems, Data Structures, System Design.',
+                '<strong>Affiliations:</strong> CodePath TA, CUNY Tech Prep, SEO, CS Club.'
+            ]
+        }
+    ]
+    hobbies = [
+        {
+            'name': 'Socc',
+            'img': 'img/soccer.jpg',
+            'alt': 'Soccer ball on a field',
+            'desc': "I'm an avid soccer fan and player, enjoying both watching matches and playing in local leagues. It's a great way to stay active, sharpen my strategic thinking, and work as part of a team."
+        }
+    ]
+    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), work_experiences=work_experiences, education=education, hobbies=hobbies)

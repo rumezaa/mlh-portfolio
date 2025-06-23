@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:title" content="Personal Portfolio">
@@ -48,54 +47,45 @@
     <!-- Work Experience Section -->
     <div class="section">
         <h2>Work Experience</h2>
+        {% for exp in work_experiences %}
         <div class="experience-item">
-            <h3>Production Engineer</h3>
-            <h4>Meta & Major League Hacking | Jun 2025 - Present</h4>
+            <h3>{{ exp.title }}</h3>
+            <h4>{{ exp.company }} | {{ exp.date }}</h4>
             <ul>
-                <li>Developing skills in DevOps, infrastructure, and distributed systems as a Production Engineering Fellow, focusing on the principles of reliability and scalability that power Meta's services.</li>
+                {% for detail in exp.details %}
+                <li>{{ detail|safe }}</li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="experience-item">
-            <h3>Software Engineer Intern, HBO Max</h3>
-            <h4>Warner Bros. Discovery | Jun 2025 - Present</h4>
-            <ul>
-                <li>Contributing to the GCX Instrumentation Tooling team for HBO Max, utilizing Kotlin and TypeScript to enhance monitoring and content delivery systems.</li>
-            </ul>
-        </div>
-        <div class="experience-item">
-            <h3>Software Engineer Intern</h3>
-            <h4>New England Investment Consulting Group | May 2024 – Aug 2024</h4>
-            <ul>
-                <li>Engineered a full-stack AI-driven school platform for over 1,000 students using React, TypeScript, and Python.</li>
-                <li>Implemented a Go microservice and set up a full CI/CD pipeline with AWS, Jenkins, and Docker, cutting deployment times by 30%.</li>
-            </ul>
-        </div>
+        {% endfor %}
     </div>
 
-    <!-- Education Section -->
     <div class="section">
         <h2>Education</h2>
+        {% for edu in education %}
         <div class="experience-item">
-            <h3>B.S. in Computer Engineering</h3>
-            <h4>CUNY College of Staten Island | Expected May 2026</h4>
+            <h3>{{ edu.degree }}</h3>
+            <h4>{{ edu.school }} | {{ edu.date }}</h4>
             <ul>
-                <li><strong>Minor:</strong> Computer Science | <strong>GPA:</strong> 3.9 / 4.0</li>
-                <li><strong>Relevant Coursework:</strong> Object Oriented Programming, Operating Systems, Data Structures, System Design.</li>
-                <li><strong>Affiliations:</strong> CodePath TA, CUNY Tech Prep, SEO, CS Club.</li>
+                {% for detail in edu.details %}
+                <li>{{ detail|safe }}</li>
+                {% endfor %}
             </ul>
         </div>
+        {% endfor %}
     </div>
 
-    <!-- Hobbies Section -->
     <div class="section">
         <h2>Hobbies & Interests</h2>
+        {% for hobby in hobbies %}
         <div class="hobby-item">
-            <img src="{{ url_for('static', filename='img/soccer.jpg') }}" alt="Soccer ball on a field">
+            <img src="{{ url_for('static', filename=hobby.img) }}" alt="{{ hobby.alt }}">
             <div class="hobby-text">
-                <h3>Soccer</h3>
-                <p>I'm an avid soccer fan and player, enjoying both watching matches and playing in local leagues. It's a great way to stay active, sharpen my strategic thinking, and work as part of a team.</p>
+                <h3>{{ hobby.name }}</h3>
+                <p>{{ hobby.desc }}</p>
             </div>
         </div>
+        {% endfor %}
     </div>
 
 </body>
