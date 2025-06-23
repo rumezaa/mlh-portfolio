@@ -70,6 +70,41 @@ body {
     color: #FFD700;
 }
 
+.toggle-profile-btn {
+    background-color: #FFD700 !important;
+    color: #1C539F !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    margin-left: 10px !important;
+}
+
+.toggle-profile-btn:hover {
+    background-color: #FFED4E !important;
+    color: #1C539F !important;
+    transform: scale(1.05) !important;
+}
+
+.profile.rumeza {
+    background-color: #8A6AC9 !important;
+}
+
+.nav-bar.rumeza {
+    background-color: #8A6AC9;
+}
+
+.nav-bar.rumeza .toggle-profile-btn {
+    color: #8A6AC9 !important;
+}
+
+.nav-bar.rumeza .toggle-profile-btn:hover {
+    color: #8A6AC9 !important;
+}
+
+.rumeza .section h2 {
+    color: #8A6AC9 !important;
+}
+
 .profile {
     background-color: #1d539f !important;
     text-align: center;
@@ -91,6 +126,9 @@ body {
         margin-right: auto;
         display: block;        
         padding: 20px;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
 }
 
 .profile .profile-picture {
@@ -177,6 +215,7 @@ body {
     display: flex;
     align-items: center;
     gap: 25px; 
+    padding-bottom: 20px;
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

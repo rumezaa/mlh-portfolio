@@ -1,0 +1,93 @@
+{
+    "name": "Rumeza Fatima",
+    "img": "img/rumeza.png",
+    "about": "I'm a computer science and data science student who loves building things for humans. I'm advanced in Python and JS/TS with a lot of experience in full-stack mobile and web development as well as a mastery of turning designs into code. My most epic skillset lies in the fact that I consistently push the boundaries of coventional thinking to turn my ambitious visions into reality. I love chasing after unique experiences and jumping off (imaginary) cliffs to test my skills.",
+    "work_experiences": [
+      {
+        "title": "Production Engineer",
+        "company": "Meta & Major League Hacking",
+        "date": "Jun 2025 - Present",
+        "details": [
+          "Developing skills in DevOps, infrastructure, and distributed systems as a Production Engineering Fellow, focusing on the principles of reliability and scalability that power Meta's services."
+        ]
+      },
+      {
+        "title": "Health Interfaces Developer Intern",
+        "company": "Symbiotic AI",
+        "date": "Aug 2024 - April 2025",
+        "details": [
+          "Implemented FHIR data lake via AWS HealthLake, ingesting over 250,000 clinical records from Epic into a normalized format. Built a Django-based API layer to enable secure and efficient access to FHIR resources, reducing data retrieval time by 40%",
+          "Designed and developed product waitlist site using Next.js; used AWS quicksite to optimize site analytics management by 80%",
+          "Engineered full stack web interface for v1 Revaz AI in Svelte and Django to manage data interoperability with health systems"
+        ]
+      },
+      {
+        "title": "Founding Engineer",
+        "company": "EasyShifa",
+        "date": "Aug 2023 – Sep 2023",
+        "details": [
+          "Designed MVP platform for early pharma-tech startup in Pakistan, creating Figma mockups for various user group portals",
+          "Developed 3+ pitch decks for early seed rounds, securing a partnership with Pakistan's largest pharmacy chain, Bashir Sons",
+          "Prototyped UX/UI for customer and delivery system interfaces and developed MVP with React Native and NativewindCSS"
+        ]
+      },
+      {
+        "title": "Software Engineering Intern",
+        "company": "Arcurve",
+        "date": "Jul 2023 – Aug 2023",
+        "details": [
+          "Performed UI audits on internal touchscreen project, expertly restyling and creating 7+ pages to replicate proposed Figma UI",
+          "Learned TypeScript and stylized components in strict time, finalizing features for internal project 3 months ahead of schedule",
+          "Pitched feature for company to add to recruitment project, transitioning to fullstack role, enabling prospective employees to get matched with roles based on skills, creating a valuable data collection asset and attractive recruitment strategy for company"
+        ]
+      },
+      {
+        "title": "Co-founder",
+        "company": "Torpedo",
+        "date": "Dec 2022 – Jul 2023",
+        "details": [
+          "Founded digital career advisor that creates personalized opportunity pathways and tailored resources for young professionals",
+          "Developed 3+ pitch decks for early seed rounds, resulting in acceptance to LOI, partnerships with ADPLIST and Bachmanity VC",
+          "Prototyped platform in Figma, creating landing site in a week using ReactJS and Tailwind, garnering 30+ signups in initial days"
+        ]
+      },
+      {
+        "title": "Software Engineering Intern",
+        "company": "Pixeltree Inc",
+        "date": "Jul 2022 – Aug 2022",
+        "details": [
+          "Utilized ReactJS and TailwindCSS to develop and style internal ecommerce project, shipping V2 months ahead of schedule",
+          "Created 20+ features, programming controllers and models with Ruby on Rails to optimize data distribution in app",
+          "Developed company's hackathon portal, creating template for future hackathons, leading to 70% increase in participants"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "degree": "B.S. in Computer Science and Data Science",
+        "school": "University of Calgary",
+        "date": "Expected June 2028",
+        "details": [
+          "<strong>GPA:</strong> dw about it",
+          "<strong>Relevant Coursework:</strong> Object Oriented Programming, Data Structures, System Design, Deep Learning"
+        ]
+      }
+    ],
+    "hobbies": [
+      {
+        "name": "Filmmaking",
+        "img": "img/hobby/film.png",
+        "alt": "filmmaking equipment",
+        "desc": "As much as I love building things, I also love telling stories. Filmmaking allows me to combine my love for technology and art to create something that can resonate with a variety of audiences and maximize the reach of my innovations"
+      },
+      {
+        "name": "Travelling",
+        "img": "img/hobby/travel.png",
+        "alt": "plane",
+        "desc": "I love travelling and exploring new places. It's a great way to learn about different cultures and cuisines and to meet new people."
+      }
+    ],
+    "locations": [
+      "Granville Island, Vancouver, BC"
+    ]
+  } 
