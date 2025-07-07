@@ -1,4 +1,5 @@
 # MLH Portfolio - Dual Profile Portfolio Site
+# CHANGES WEEK 3 (script auto-redeploy)
 
 Welcome to our MLH Fellowship Portfolio! This is a Flask-based portfolio site featuring dual profiles for Ahmad Basyouni and Rumeza Fatima, with dynamic content loading from JSON files and a toggle functionality to switch between profiles.
 
