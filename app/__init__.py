@@ -94,6 +94,10 @@ def hobbies_page():
                          other_profile_name=other_profile_data.get('name', 'Unknown'),
                          hobbies=profile_data.get('hobbies', []))
 
+@app.route('/timeline')
+def timeline_page():
+    return render_template('timeline.html')
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_timeline_post():
     name = request.form['name']

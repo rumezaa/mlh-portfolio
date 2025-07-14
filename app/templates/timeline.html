@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="Timeline">
+    <meta property="og:description" content="Timeline Posts">
+    <meta property="og:url" content="{{ url }}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
+    <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
+    <title>{{ title }}</title>
+</head>
+
+<body class="{% if profile == 'rumeza' %}rumeza{% endif %}">
+    <header class="nav-bar {% if profile == 'rumeza' %}rumeza{% endif %}">
+        <div class="nav-content">
+            <a href="/?profile={{ profile }}"><div class="nav-logo"><img src="{{ url_for('static', filename='img/logo.svg') }}" /></div></a>
+            <nav>
+                <a href="/?profile={{ profile }}">Home</a>
+                <a href="/hobbies?profile={{ profile }}">Hobbies</a>
+                <a href="/timeline?profile={{ profile }}">Timeline</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="section">
+        <h2>Timeline Posts</h2>
+        
+        <div class="timeline-form">
+            <h3 style="margin-top: 0; color: #333;">Create a New Post</h3>
+            <form id="timelineForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" required placeholder="Share your thoughts..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Post</button>
+            </form>
+        </div>
+
+        <div id="messages"></div>
+
+        <div class="timeline-posts">
+            <h3>Recent Posts</h3>
+            <div id="timelinePosts">
+                <div class="loading">Loading posts...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // gen gravator
+        function getGravatarUrl(email) {
+            const hash = CryptoJS.MD5(email.toLowerCase().trim()).toString();
+            return `https://www.gravatar.com/avatar/${hash}?d=mp&s=100`;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(word => word.charAt(0)).join('').toUpperCase().slice(0, 2);
+        }
+
+        // display timeline posts
+        function displayTimelinePosts(posts) {
+            const container = document.getElementById('timelinePosts');
+            
+            if (posts.length === 0) {
+                container.innerHTML = '<div class="loading">No posts yet. Be the first to share something!</div>';
+                return;
+            }
+
+            container.innerHTML = posts.map(post => `
+                <div class="timeline-post">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <img src="${getGravatarUrl(post.email)}" alt="${post.name}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                        </div>
+                        <div class="post-info">
+                            <h4 class="post-name">${post.name}</h4>
+                            <p class="post-email">${post.email}</p>
+                            <p class="post-date">${formatDate(post.created_at)}</p>
+                        </div>
+                    </div>
+                    <p class="post-content">${post.content}</p>
+                </div>
+            `).join('');
+        }
+
+        async function loadTimelinePosts() {
+            try {
+                const response = await fetch('/api/timeline_post');
+                const data = await response.json();
+                displayTimelinePosts(data.timeline_posts);
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                document.getElementById('timelinePosts').innerHTML = 
+                    '<div class="error-message">Error loading posts. Please try again later.</div>';
+            }
+        }
+
+        function showMessage(message, type) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'error' ? 'error-message' : 'success-message';
+            messageDiv.textContent = message;
+            messagesDiv.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+
+        document.getElementById('timelineForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'posting...';
+            
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('/api/timeline_post', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const newPost = await response.json();
+                    showMessage('Post created successfully!', 'success');
+                    this.reset();
+                    
+                    await loadTimelinePosts();
+                } else {
+                    throw new Error('Failed to create post');
+                }
+            } catch (error) {
+                console.error('Error creating post:', error);
+                showMessage('Error creating post. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', loadTimelinePosts);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</body>
+</html>
