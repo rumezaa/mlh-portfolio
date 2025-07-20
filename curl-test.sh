@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-BASE_URL="http://localhost:5000/api/timeline_post"
+BASE_URL="http://localhost:5001/api/timeline_post"
 
 NAME="TestUser$RANDOM"
 EMAIL="test${RANDOM}@example.com"
@@ -20,7 +20,7 @@ echo "Created entry with ID = $NEW_ID"
 echo "Fetching all time line posts"
 ALL_RESP=$(curl -s "$BASE_URL")
 
-if echo "$ALL_RESP" | grep -q "\id\":%NEW_ID"; then
+if echo "$ALL_RESP" | grep -q "\"id\":$NEW_ID"; then
     echo "Found ID $NEW_ID in GET response"
 else
     echo "Did not find ID $NEW_ID in Get RESPONSE"
