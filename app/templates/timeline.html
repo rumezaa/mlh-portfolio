@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Timeline — {{ title }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+<body class="{% if profile == 'rumeza' %}rumeza{% endif %}">
+
+  <header class="nav-bar {% if profile == 'rumeza' %}rumeza{% endif %}">
+    <div class="nav-content">
+      <a href="/?profile={{ profile }}"><div class="nav-logo">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" />
+      </div></a>
+      <nav>
+        <a href="/?profile={{ profile }}">Home</a>
+        <a href="/hobbies?profile={{ profile }}">Hobbies</a>
+        <a href="/timeline?profile={{ profile }}">Timeline</a>
+        <a href="/?profile={{ other_profile }}" class="toggle-profile-btn">
+          Switch to {{ other_profile_name }}
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="section">
+    <h2>Create a New Post</h2>
+    <form id="timeline-form" class="timeline-form">
+      <label>
+        Name
+        <input type="text" name="name" required placeholder="Your name" />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required placeholder="you@example.com" />
+      </label>
+      <label>
+        Content
+        <textarea name="content" required placeholder="What's on your mind?"></textarea>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="section">
+    <h2>All Posts</h2>
+    <div id="posts-container">
+      <!-- posts will be injected here -->
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('timeline-form');
+    const container = document.getElementById('posts-container');
+    const BASE = '/api/timeline_post';
+
+    // Fetch & render all posts
+    async function loadPosts() {
+      container.innerHTML = 'Loading…';
+      const res = await fetch(BASE);
+      const data = await res.json();
+      if (!data.timeline_posts) {
+        container.textContent = 'Failed to load posts.';
+        return;
+      }
+      container.innerHTML = data.timeline_posts
+        .map(p => `
+          <div class="timeline-item">
+            <h3>${p.name} <small>(${new Date(p.created_at).toLocaleString()})</small></h3>
+            <p>${p.content}</p>
+          </div>`)
+        .join('');
+    }
+
+    // Handle form submission
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const formData = new URLSearchParams(new FormData(form));
+      const res = await fetch(BASE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData
+      });
+      if (res.ok) {
+        form.reset();
+        loadPosts();
+      } else {
+        alert('Error submitting post');
+      }
+    });
+
+    // initial load
+    loadPosts();
+  </script>
+</body>
+</html>

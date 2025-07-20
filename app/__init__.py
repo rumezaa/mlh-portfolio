@@ -94,6 +94,26 @@ def hobbies_page():
                          other_profile_name=other_profile_data.get('name', 'Unknown'),
                          hobbies=profile_data.get('hobbies', []))
 
+@app.route("/timeline")
+def timeline_page():
+    profile = request.args.get("profile", "ahmad")
+    if profile not in ["ahmad", "rumeza"]:
+        profile = "ahmad"
+
+    other_profile = "rumeza" if profile == "ahmad" else "ahmad"
+
+    other_profile_data = load_profile_data(other_profile)
+    other_profile_name = other_profile_data.get("name", "Unknown")
+
+    # 4) render your new template
+    return render_template(
+        "timeline.html",
+        title=load_profile_data(profile).get("name", "MLH Fellow"),
+        profile=profile,
+        other_profile=other_profile,
+        other_profile_name=other_profile_name
+    )
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     name = request.form['name']
