@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-BASE_URL="http://localhost:5001/api/timeline_post"
+BASE_URL="http://localhost:5000/api/timeline_post"
 
 NAME="TestUser$RANDOM"
 EMAIL="test${RANDOM}@example.com"
