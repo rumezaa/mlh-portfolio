@@ -116,9 +116,18 @@ def timeline_page():
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
+    name = request.form.get('name', '').strip()
+    if not name:
+        return "Invalid name", 400
+    
+    email = request.form.get('email', '').strip()
+    if not email or '@' not in email or '.' not in email:
+        return "Invalid email", 400
+    
+    content = request.form.get('content', '').strip()
+    if not content:
+        return "Invalid content", 400
+    
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
     print(f"Created Timeline post with id={timeline_post.id}")
     return model_to_dict(timeline_post)
@@ -139,3 +148,8 @@ def delete_timeline_post(post_id):
     if deleted_count:
         return {'status': 'deleted', 'id': post_id}
     return abort(404, description=f"No timeline post with id={post_id}")
+
+@app.route('/api/timeline_post/clear', methods=["DELETE"])
+def clear_all_timeline_posts():
+    deleted_count = TimelinePost.delete().execute()
+    return {'status': 'cleared', 'deleted_count': deleted_count}
