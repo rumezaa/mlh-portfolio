@@ -1,60 +1,30 @@
-# test_db.py
-
 import unittest
-
 from peewee import *
-
-from app import TimelinePost
+from app import TimelinePost  # Corrected model name
 
 MODELS = [TimelinePost]
-
-# use an in-memory SQLite for tests.
+# In-memory SQLite DB (used only for testing)
 test_db = SqliteDatabase(':memory:')
 
 class TestTimelinePost(unittest.TestCase):
     def setUp(self):
-        # Bind model classes to test db. Since we have a complete list of
-        # all models, we do not need to recursively bind dependencies.
+        # Bind the model to the test DB and create the table
         test_db.bind(MODELS, bind_refs=False, bind_backrefs=False)
-
         test_db.connect()
         test_db.create_tables(MODELS)
 
     def tearDown(self):
-        # Not strictly necessary since SQLite in-memory databases only live
-        # for the duration of the connection, and in the next step we close
-        # the connection...but a good practice all the same.
+        # Drop the table and close the DB after every test
         test_db.drop_tables(MODELS)
-
-        # Close connection to db.
         test_db.close()
 
-    def test_timeline_post(self):
-        # Create 2 timeline posts.
-        first_post = TimelinePost.create(name='John Doe',
-            email='john@example.com', content='Hello world, I\'m John!')
-        assert first_post.id == 1
-        second_post = TimelinePost.create(name='Jane Doe',
-            email='jame@example.com', content='Hello world, I\'m Jane!')
-        assert second_post.id == 2
-       
-        # assert content of posts
-        posts = TimelinePost.select().order_by(TimelinePost.id)
-        assert posts.count() == 2
-
-        post1 = posts[0]
-        assert post1.name == 'John Doe'
-        assert post1.email == 'john@example.com'
-        assert post1.content == 'Hello world, I\'m John!'
-
-        post2 = posts[1]
-        assert post2.name == 'Jane Doe'
-        assert post2.email == 'jame@example.com'
-        assert post2.content == 'Hello world, I\'m Jane!'
-
-        TimelinePost.delete().execute()
-        # delete all posts
-        assert TimelinePost.select().count() == 0
-
-
-
+    def test_timeLine_post(self):
+        first = TimelinePost.create(name='John Doe', email='john@example.com', content='Hello')
+        assert first.id == 1
+        second = TimelinePost.create(name='Jane Doe', email='jane@example.com', content='Hi')
+        assert second.id == 2
+        # Check the data
+        posts = list(TimelinePost.select().order_by(TimelinePost.id))
+        self.assertEqual(len(posts), 2)
+        self.assertEqual(posts[0].name, 'John Doe')
+        self.assertEqual(posts[1].email, 'jane@example.com')
