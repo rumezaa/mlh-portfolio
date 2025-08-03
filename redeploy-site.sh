@@ -1,14 +1,11 @@
 #!/bin/bash
+cd /root/mlh-portfolio
 
 # Pull latest changes from GitHub main branch
 git fetch && git reset origin/main --hard
 
-# Activate Python virtual environment
-source python3-virtualenv/bin/activate
+# 3) Tear down any running containers
+docker compose -f docker-compose.prod.yml down
 
-# Install Python dependencies
-pip install -r requirements.txt
-
-# restart systemd service and show status
-sudo systemctl restart myportfolio
-sudo systemctl status myportfolio
+# 4) Rebuild images & bring everything up in detached mode
+docker compose -f docker-compose.prod.yml up -d --build
