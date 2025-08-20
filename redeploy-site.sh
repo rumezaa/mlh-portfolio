@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd mlh-portfolio
+
 git fetch
 git reset origin/main --hard
 
