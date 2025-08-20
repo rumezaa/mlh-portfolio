@@ -30,8 +30,5 @@ jobs:
       - name: Install Dependencies
         run: venv/bin/pip install -r requirements.txt
 
-      - name: Clear Database
-        run: TESTING=true python3 -c "from app import mydb, TimeLinePost; mydb.connect(reuse_if_open=True); TimeLinePost.delete().execute(); print('Database cleared successfully')"
-        
       - name: Run Tests
         run: ./run_test.sh
